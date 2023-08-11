@@ -1,4 +1,5 @@
 import 'package:crypto/crypto.dart';
+import 'package:equatable/equatable.dart';
 import 'dart:convert';
 
 import 'package:marvel_universe/core/usecases/usecase.dart';
@@ -25,13 +26,16 @@ class MarvelHashGenerator
   }
 }
 
-class MarvelHashGeneratorParams {
+class MarvelHashGeneratorParams extends Equatable {
   final String timestamp;
   final String publicKey;
   final String privateKey;
 
-  MarvelHashGeneratorParams(
+  const MarvelHashGeneratorParams(
       {required this.timestamp,
       required this.publicKey,
       required this.privateKey});
+
+  @override
+  List<Object?> get props => [timestamp, publicKey, privateKey];
 }
