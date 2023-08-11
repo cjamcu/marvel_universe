@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:marvel_universe/core/colors.dart';
 import 'package:marvel_universe/features/characters/presentation/characters_page.dart';
+import 'injection_container.dart' as di;
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
   runApp(const MyApp());
 }
 

@@ -4,12 +4,14 @@ class SearchTextField extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final TextEditingController controller;
   final String hintText;
+  final bool? enabled;
 
   const SearchTextField({
     Key? key,
     required this.onChanged,
     required this.controller,
     required this.hintText,
+     this.enabled,
   }) : super(key: key);
 
   @override
@@ -18,6 +20,7 @@ class SearchTextField extends StatelessWidget {
       height: 50,
       child: TextField(
         controller: controller,
+        enabled: enabled,
         onChanged: onChanged,
         decoration: InputDecoration(
           hintText: hintText,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marvel_universe/features/characters/domain/entity/character.dart';
+import 'package:marvel_universe/features/characters/domain/entities/character.dart';
 import 'package:marvel_universe/features/characters/presentation/widgets/character_cache_image.dart';
 
 class CharacterCard extends StatelessWidget {
