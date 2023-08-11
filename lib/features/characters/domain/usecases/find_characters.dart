@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:marvel_universe/core/usecases/usecase.dart';
 import 'package:marvel_universe/features/characters/domain/entities/character.dart';
 import 'package:marvel_universe/features/characters/domain/repositories/marvel_repository.dart';
@@ -17,14 +18,17 @@ class FindCharacters extends UseCase<CharactersInfo, FindCharactersParams> {
   }
 }
 
-class FindCharactersParams {
+class FindCharactersParams extends Equatable {
   final int page;
   final String? name;
   final String timestamp;
 
-  FindCharactersParams({
+  const FindCharactersParams({
     this.page = 0,
     this.name,
     required this.timestamp,
   });
+
+  @override
+  List<Object?> get props => [page, name, timestamp];
 }

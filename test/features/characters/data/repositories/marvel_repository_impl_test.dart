@@ -40,8 +40,8 @@ void main() {
       privateKey: '',
     );
 
-    registerFallbackValue(params);
-    when(() => marvelHashGenerator.execute(any())).thenAnswer(
+
+    when(() => marvelHashGenerator.execute(params)).thenAnswer(
       (_) async => marvelHash,
     );
 
