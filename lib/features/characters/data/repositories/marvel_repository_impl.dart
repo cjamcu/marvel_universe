@@ -19,7 +19,6 @@ class MarvelRepositoryImpl implements MarvelRepository {
     required this.marvelPrivateKey,
   });
 
-  final baseUrl = 'https://gateway.marvel.com:443/v1/public/';
 
   @override
   Future<CharactersInfo> findCharacters({
