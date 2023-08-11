@@ -1,62 +1,39 @@
-import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:marvel_universe/core/usecases/marvel_hash_generator.dart';
+import 'package:marvel_universe/features/characters/data/datasources/marvel_remote_data_source.dart';
 import 'package:marvel_universe/features/characters/data/repositories/marvel_repository_impl.dart';
 import 'package:marvel_universe/features/characters/domain/entities/character.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
+
 class MockMarvelHashGenerator extends Mock implements MarvelHashGenerator {}
 
+class MockMarvelRemoteDataSource extends Mock
+    implements MarvelRemoteDataSource {}
+
 void main() {
-  late MockHttpClient mockHttpClient;
-  late String jsonString;
-  late MarvelHashGenerator marvelHashGenerator;
+  late MarvelRemoteDataSource remoteDataSource;
 
   setUp(() {
-    jsonString = File('test/fixtures/characters.json').readAsStringSync();
-    mockHttpClient = MockHttpClient();
-    marvelHashGenerator = MockMarvelHashGenerator();
+    remoteDataSource = MockMarvelRemoteDataSource();
   });
 
   test("Find Characters", () async {
-    final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-    const marvelHash = 'hash';
-
-    final paramsUri = {
-      'apikey': '',
-      'ts': timestamp.toString(),
-      'hash': marvelHash,
-      'limit': 10.toString(),
-      'offset': 0.toString(),
-    };
-    final uri =
-        Uri.https('gateway.marvel.com', '/v1/public/characters', paramsUri);
-    final params = MarvelHashGeneratorParams(
-      timestamp: timestamp,
-      publicKey: '',
-      privateKey: '',
-    );
-
-
-    when(() => marvelHashGenerator.execute(params)).thenAnswer(
-      (_) async => marvelHash,
-    );
-
-    when(() => mockHttpClient.get(uri))
-        .thenAnswer((_) async => http.Response(jsonString, 200));
+    when(() =>
+        remoteDataSource.findCharacters(
+            page: any(named: 'page'),
+            timestamp: any(named: 'timestamp'),
+            name: any(named: 'name'))).thenAnswer((_) async =>
+        const CharactersInfo(totalElements: 1, totalPages: 1, characters: []));
 
     final repository = MarvelRepositoryImpl(
-      client: mockHttpClient,
-      marvelHashGenerator: marvelHashGenerator,
-      marvelPublicKey: '',
-      marvelPrivateKey: '',
+      marvelRemoteDataSource: remoteDataSource,
     );
 
-    final result =
-        await repository.findCharacters(page: 0, timestamp: timestamp);
+    final result = await repository.findCharacters(page: 0, timestamp: '');
 
     expect(result, isA<CharactersInfo>());
   });
