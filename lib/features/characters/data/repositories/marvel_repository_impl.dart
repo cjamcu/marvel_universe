@@ -1,13 +1,13 @@
 import 'dart:convert';
 
+import 'package:http/http.dart';
 import 'package:marvel_universe/core/usecases/marvel_hash_generator.dart';
 import 'package:marvel_universe/features/characters/data/models/characters_model.dart';
 import 'package:marvel_universe/features/characters/domain/entities/character.dart';
 import 'package:marvel_universe/features/characters/domain/repositories/marvel_repository.dart';
-import 'package:http/http.dart' as http;
 
 class MarvelRepositoryImpl implements MarvelRepository {
-  final http.Client client;
+  final Client client;
   final MarvelHashGenerator marvelHashGenerator;
   final String marvelPublicKey;
   final String marvelPrivateKey;
@@ -19,14 +19,13 @@ class MarvelRepositoryImpl implements MarvelRepository {
     required this.marvelPrivateKey,
   });
 
-
   @override
   Future<CharactersInfo> findCharacters({
     required int page,
+    required String timestamp,
     String? name,
   }) async {
     const limit = 10;
-    final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
     final offset = page * limit;
     final marvelHashGeneratorParams = MarvelHashGeneratorParams(
       timestamp: timestamp,
@@ -49,7 +48,7 @@ class MarvelRepositoryImpl implements MarvelRepository {
     final Uri uri =
         Uri.https('gateway.marvel.com', '/v1/public/characters', params);
 
-    final response = await http.get(uri);
+    final response = await client.get(uri);
     final data = jsonDecode(response.body);
 
     final charactersResponse = CharactersModel.fromJson(data);

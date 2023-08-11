@@ -23,6 +23,8 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
     FindCharactersEvent event,
     Emitter<CharactersState> emit,
   ) async {
+    emit(LoadingCharacters(state.model));
+
     try {
       final charactersResponse = await _fetchCharacters(FindCharactersParams());
       emit(_createLoadedCharactersState(charactersResponse));
