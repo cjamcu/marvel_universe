@@ -1,16 +1,5 @@
 # marvel_universe
 
-A new Flutter project.
+Step into the Marvel universe like never before with our one-of-a-kind app. When you choose a character, you'll dive into their world through their photo, name, and a detailed description. What's more, we've added the feature to search for characters by name, enhancing your experience even further. On the technical side, this project is built using Flutter, leveraging the robust BLoC state management. We've embraced a clean architecture, following a layered structure, and adhered to the SOLID principles to ensure a robust and scalable codebase.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
