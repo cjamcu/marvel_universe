@@ -22,13 +22,18 @@ class MarvelRepositoryImpl implements MarvelRepository {
   final baseUrl = 'https://gateway.marvel.com:443/v1/public/';
 
   @override
-  Future<List<Character>> findCharacters({required int limit}) async {
+  Future<CharactersInfo> findCharacters({
+    required int page,
+    String? name,
+  }) async {
+    const limit = 10;
     final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-
+    final offset = page * limit;
     final marvelHashGeneratorParams = MarvelHashGeneratorParams(
-        timestamp: timestamp,
-        publicKey: marvelPublicKey,
-        privateKey: marvelPrivateKey);
+      timestamp: timestamp,
+      publicKey: marvelPublicKey,
+      privateKey: marvelPrivateKey,
+    );
 
     final marvelHash =
         await marvelHashGenerator.execute(marvelHashGeneratorParams);
@@ -38,6 +43,8 @@ class MarvelRepositoryImpl implements MarvelRepository {
       'ts': timestamp.toString(),
       'hash': marvelHash,
       'limit': limit.toString(),
+      'offset': offset.toString(),
+      if ((name ?? '').isNotEmpty) 'nameStartsWith': name,
     };
 
     final Uri uri =
@@ -47,6 +54,10 @@ class MarvelRepositoryImpl implements MarvelRepository {
     final data = jsonDecode(response.body);
 
     final charactersResponse = CharactersResponse.fromJson(data);
-    return charactersResponse.data.results;
+    return CharactersInfo(
+      characters: charactersResponse.data.results,
+      totalElements: charactersResponse.data.total,
+      totalPages: (charactersResponse.data.total / limit).ceil(),
+    );
   }
 }

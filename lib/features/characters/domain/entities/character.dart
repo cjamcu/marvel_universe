@@ -1,5 +1,20 @@
 import 'package:equatable/equatable.dart';
 
+class CharactersInfo extends Equatable {
+  final int totalElements;
+  final List<Character> characters;
+  final int totalPages;
+
+  const CharactersInfo({
+    required this.totalElements,
+    required this.characters,
+    required this.totalPages,
+  });
+
+  @override
+  List<Object?> get props => [totalElements, characters, totalPages];
+}
+
 class Character extends Equatable {
   final int id;
   final String name;
@@ -13,7 +28,7 @@ class Character extends Equatable {
     required this.id,
     required this.name,
     required this.image,
-     this.description,
+    this.description,
     this.wikiUrl,
     this.comicLink,
     this.detailLink,

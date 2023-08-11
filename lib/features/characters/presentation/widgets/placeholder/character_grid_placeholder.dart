@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:marvel_universe/features/characters/presentation/widgets/placeholder/character_card_placeholder.dart';
 
 class CharacterGridPlaceholder extends StatelessWidget {
-  const CharacterGridPlaceholder({super.key});
+  const CharacterGridPlaceholder({super.key, required this.itemCount});
+
+  final int itemCount;
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +16,9 @@ class CharacterGridPlaceholder extends StatelessWidget {
         mainAxisSpacing: 5,
         crossAxisSpacing: 0,
       ),
-      itemCount: 4, // You can adjust the number of placeholder items
+      itemCount: itemCount,
       itemBuilder: (context, index) {
-        return const CharacterCardPlaceholder(); // Placeholder for individual character
+        return const CharacterCardPlaceholder();
       },
     );
   }

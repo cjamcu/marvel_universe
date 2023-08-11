@@ -24,7 +24,7 @@ class LoadingCharacters extends CharactersState {
   const LoadingCharacters(this.model) : super(model);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [model];
 }
 
 class LoadedCharacters extends CharactersState {
@@ -33,7 +33,7 @@ class LoadedCharacters extends CharactersState {
   const LoadedCharacters(this.model) : super(model);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [model];
 }
 
 class ErrorLoadingCharacters extends CharactersState {
@@ -42,32 +42,70 @@ class ErrorLoadingCharacters extends CharactersState {
   const ErrorLoadingCharacters(this.model) : super(model);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [model];
 }
+
+class SearchingCharacters extends CharactersState {
+  final Model model;
+
+  const SearchingCharacters(this.model) : super(model);
+
+  @override
+  List<Object> get props => [model];
+}
+
+class NoResultsFound extends CharactersState {
+  final Model model;
+
+  const NoResultsFound(this.model) : super(model);
+
+  @override
+  List<Object> get props => [model];
+}
+
+class LoadingMoreCharacters extends CharactersState {
+  final Model model;
+
+  const LoadingMoreCharacters(this.model) : super(model);
+
+  @override
+  List<Object> get props => [model];
+}
+
 
 class Model extends Equatable {
   final List<Character> characters;
   final int totalPages;
+  final int totalElements;
   final int page;
+  final String searchQuery;
 
   const Model({
     this.characters = const <Character>[],
     this.page = 0,
     this.totalPages = 0,
+    this.totalElements = 0,
+    this.searchQuery = '',
   });
 
   Model copyWith({
     List<Character>? characters,
     int? totalPages,
+    int? totalElements,
     int? page,
+    String? searchQuery,
   }) {
     return Model(
       characters: characters ?? this.characters,
       totalPages: totalPages ?? this.totalPages,
+      totalElements: totalElements ?? this.totalElements,
       page: page ?? this.page,
+      searchQuery: searchQuery ?? this.searchQuery,
     );
   }
 
   @override
   List<Object?> get props => [characters, totalPages, page];
 }
+
+

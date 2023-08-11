@@ -1,6 +1,8 @@
 import '../entities/character.dart';
 
 abstract class MarvelRepository {
-  Future<List<Character> > findCharacters({required int limit});
+  Future<CharactersInfo> findCharacters({
+    required int page,
+    String? name,
+  });
 }
-

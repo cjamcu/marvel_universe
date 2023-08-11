@@ -10,3 +10,19 @@ class FindCharactersEvent extends CharactersEvent {
   @override
   List<Object?> get props => [];
 }
+
+class SearchCharactersByNameEvent extends CharactersEvent {
+  final String name;
+
+  const SearchCharactersByNameEvent(this.name);
+
+  @override
+  List<Object?> get props => [name];
+}
+
+class LoadMoreCharactersEvent extends CharactersEvent {
+  const LoadMoreCharactersEvent();
+
+  @override
+  List<Object?> get props => [];
+}
