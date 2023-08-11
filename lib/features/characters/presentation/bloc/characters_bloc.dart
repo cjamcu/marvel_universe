@@ -24,13 +24,8 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
     Emitter<CharactersState> emit,
   ) async {
     try {
-      emit(LoadingCharacters(state.model));
       final charactersResponse = await _fetchCharacters(FindCharactersParams());
-      emit(LoadedCharacters(state.model.copyWith(
-        characters: charactersResponse.characters,
-        totalPages: charactersResponse.totalPages,
-        totalElements: charactersResponse.totalElements,
-      )));
+      emit(_createLoadedCharactersState(charactersResponse));
     } catch (_) {
       _emitErrorState(emit);
     }
@@ -51,11 +46,7 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
       if (charactersResponse.characters.isEmpty) {
         emit(NoResultsFound(state.model));
       } else {
-        emit(LoadedCharacters(state.model.copyWith(
-          characters: charactersResponse.characters,
-          totalPages: charactersResponse.totalPages,
-          totalElements: charactersResponse.totalElements,
-        )));
+        emit(_createLoadedCharactersState(charactersResponse));
       }
     } catch (_) {
       _emitErrorState(emit);
@@ -66,6 +57,7 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
     LoadMoreCharactersEvent event,
     Emitter<CharactersState> emit,
   ) async {
+    // If page is already the last one, do nothing
     if (state.model.page >= state.model.totalPages) {
       return 0;
     }
@@ -99,5 +91,14 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
 
   void _emitErrorState(Emitter<CharactersState> emit) {
     emit(ErrorLoadingCharacters(state.model));
+  }
+
+  LoadedCharacters _createLoadedCharactersState(
+      CharactersInfo charactersResponse) {
+    return LoadedCharacters(state.model.copyWith(
+      characters: charactersResponse.characters,
+      totalPages: charactersResponse.totalPages,
+      totalElements: charactersResponse.totalElements,
+    ));
   }
 }
