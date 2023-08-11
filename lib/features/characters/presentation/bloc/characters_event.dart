@@ -5,7 +5,9 @@ abstract class CharactersEvent extends Equatable {
 }
 
 class FindCharactersEvent extends CharactersEvent {
-  const FindCharactersEvent();
+  const FindCharactersEvent(this.timestamp);
+
+  final String timestamp;
 
   @override
   List<Object?> get props => [];
@@ -13,15 +15,18 @@ class FindCharactersEvent extends CharactersEvent {
 
 class SearchCharactersByNameEvent extends CharactersEvent {
   final String name;
+  final String timestamp;
 
-  const SearchCharactersByNameEvent(this.name);
+  const SearchCharactersByNameEvent({required this.name, required this.timestamp});
 
   @override
   List<Object?> get props => [name];
 }
 
 class LoadMoreCharactersEvent extends CharactersEvent {
-  const LoadMoreCharactersEvent();
+  final String timestamp;
+
+  const LoadMoreCharactersEvent(this.timestamp);
 
   @override
   List<Object?> get props => [];

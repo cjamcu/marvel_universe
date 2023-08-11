@@ -29,12 +29,13 @@ class CharactersPage extends StatelessWidget {
             SearchTextField(
               hintText: 'Search by character name',
               onChanged: (value) {
-                charactersBloc.add(SearchCharactersByNameEvent(value));
+                charactersBloc.add(SearchCharactersByNameEvent(
+                    name: value, timestamp: _getTimestamp()));
               },
             ),
             const SizedBox(height: 10),
             BlocBuilder<CharactersBloc, CharactersState>(
-              bloc: charactersBloc..add(const FindCharactersEvent()),
+              bloc: charactersBloc..add(FindCharactersEvent(_getTimestamp())),
               builder: (context, state) {
                 if (state is ErrorLoadingCharacters) {
                   return Column(
@@ -43,7 +44,8 @@ class CharactersPage extends StatelessWidget {
                       const SizedBox(height: 10),
                       ElevatedButton(
                         onPressed: () {
-                          charactersBloc.add(const FindCharactersEvent());
+                          charactersBloc
+                              .add(FindCharactersEvent(_getTimestamp()));
                         },
                         child: const Text("Retry"),
                       ),
@@ -83,7 +85,8 @@ class CharactersPage extends StatelessWidget {
                             );
                           },
                           onEndOfList: (void value) {
-                            charactersBloc.add(const LoadMoreCharactersEvent());
+                            charactersBloc
+                                .add(LoadMoreCharactersEvent(_getTimestamp()));
                           },
                           isLoadingMore: isLoadingMore,
                         ),
@@ -97,5 +100,9 @@ class CharactersPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _getTimestamp() {
+    return DateTime.now().millisecondsSinceEpoch.toString();
   }
 }

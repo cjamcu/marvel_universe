@@ -83,7 +83,7 @@ class Model extends Equatable {
   const Model({
     this.characters = const <Character>[],
     this.page = 0,
-    this.totalPages = 0,
+    this.totalPages = 1,
     this.totalElements = 0,
     this.searchQuery = '',
   });

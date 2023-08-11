@@ -24,11 +24,9 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
     Emitter<CharactersState> emit,
   ) async {
     emit(LoadingCharacters(state.model));
-
     try {
-      final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-      final charactersResponse =
-          await _fetchCharacters(FindCharactersParams(timestamp: timestamp));
+      final charactersResponse = await _fetchCharacters(
+          FindCharactersParams(timestamp: event.timestamp));
       emit(_createLoadedCharactersState(charactersResponse));
     } catch (_) {
       _emitErrorState(emit);
@@ -40,13 +38,14 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
     Emitter<CharactersState> emit,
   ) async {
     try {
-      final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
       emit(LoadingCharacters(
         state.model.copyWith(searchQuery: event.name, page: 0),
       ));
 
       final charactersResponse = await _fetchCharacters(FindCharactersParams(
-          name: event.name, page: state.model.page, timestamp: timestamp));
+          name: event.name,
+          page: state.model.page,
+          timestamp: event.timestamp));
 
       if (charactersResponse.characters.isEmpty) {
         emit(NoResultsFound(state.model));
@@ -62,7 +61,6 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
     LoadMoreCharactersEvent event,
     Emitter<CharactersState> emit,
   ) async {
-    final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
     // If page is already the last one, do nothing
     if (state.model.page >= state.model.totalPages) {
       return 0;
@@ -75,7 +73,7 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
         FindCharactersParams(
           name: state.model.searchQuery,
           page: state.model.page + 1,
-          timestamp: timestamp,
+          timestamp: event.timestamp,
         ),
       );
 
