@@ -28,10 +28,30 @@ class CharacterDetailPage extends StatelessWidget {
             children: [
               CharacterCacheImage(
                 imageUrl: character.image,
+                heroTag: character.id,
               ),
-              const SafeArea(
-                child: BackButton(
-                  color: Colors.white,
+              Positioned(
+                left: 10,
+                top: 10,
+                child: SafeArea(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(100),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: const BackButton(
+                      color: Colors.red,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -50,18 +70,16 @@ class CharacterDetailPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(
-                height: 16,
-              ),
-              Text(
-                character.description,
-                style: const TextStyle(
-                  fontSize: 16,
+              if (character.description != null)
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  child: Text(
+                    character.description ?? '',
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
               Wrap(
                 spacing: 15,
                 crossAxisAlignment: WrapCrossAlignment.center,

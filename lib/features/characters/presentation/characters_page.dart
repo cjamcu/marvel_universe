@@ -25,7 +25,7 @@ class CharactersPage extends StatelessWidget {
         body: BlocBuilder<CharactersBloc, CharactersState>(
           bloc: charactersBloc..add(const FindCharactersEvent()),
           builder: (context, state) {
-            if (state is Error) {
+            if (state is ErrorLoadingCharacters) {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

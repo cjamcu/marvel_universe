@@ -6,14 +6,16 @@ class CharacterCacheImage extends StatelessWidget {
   const CharacterCacheImage({
     super.key,
     required this.imageUrl,
+    required this.heroTag,
   });
 
   final String imageUrl;
+  final int heroTag;
 
   @override
   Widget build(BuildContext context) {
     return Hero(
-      tag: imageUrl,
+      tag: heroTag,
       child: CachedNetworkImage(
         imageUrl: imageUrl,
         imageBuilder: (context, imageProvider) => Container(

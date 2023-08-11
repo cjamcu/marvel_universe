@@ -1,76 +1,52 @@
+import 'dart:convert';
+
+import 'package:marvel_universe/core/usecases/marvel_hash_generator.dart';
+import 'package:marvel_universe/features/characters/data/models/characters_response.dart';
 import 'package:marvel_universe/features/characters/domain/entities/character.dart';
 import 'package:marvel_universe/features/characters/domain/repositories/marvel_repository.dart';
-
 import 'package:http/http.dart' as http;
 
 class MarvelRepositoryImpl implements MarvelRepository {
   final http.Client client;
+  final MarvelHashGenerator marvelHashGenerator;
+  final String marvelPublicKey;
+  final String marvelPrivateKey;
 
-  MarvelRepositoryImpl(this.client);
+  MarvelRepositoryImpl({
+    required this.client,
+    required this.marvelHashGenerator,
+    required this.marvelPublicKey,
+    required this.marvelPrivateKey,
+  });
+
+  final baseUrl = 'https://gateway.marvel.com:443/v1/public/';
 
   @override
   Future<List<Character>> findCharacters({required int limit}) async {
-    // TODO - remove this mock data
-    const characters = [
-      Character(
-        id: 1009368,
-        name: "Iron Man",
-        image: "https://i.annihil.us/u/prod/marvel/i/mg/9/c0/527bb7b37ff55.jpg",
-        description:
-            'Inventor Tony Stark applies his genius for high-tech solutions to problems as Iron Man, the armored Avenger.',
-      ),
-      Character(
-        id: 1009610,
-        name: "Spider-Man",
-        image: "https://cdn.marvel.com/content/1x/005smp_com_crd_01.jpg",
-        description: '',
-      ),
-      Character(
-        id: 1009220,
-        name: "Captain America",
-        image: "https://i.annihil.us/u/prod/marvel/i/mg/3/50/537ba56d31087.jpg",
-        description: '',
-      ),
-      Character(
-        id: 1009664,
-        name: "Thor",
-        image: "https://i.annihil.us/u/prod/marvel/i/mg/5/a0/537bc7036ab02.jpg",
-        description: '',
-      ),
-      Character(
-        id: 1009351,
-        name: "Hulk",
-        image: "https://i.annihil.us/u/prod/marvel/i/mg/5/a0/538615ca33ab0.jpg",
-        description: '',
-      ),
-      Character(
-        id: 1009610,
-        name: "Black Widow",
-        image: "https://i.annihil.us/u/prod/marvel/i/mg/6/30/537ba61b764b4.jpg",
-        description: '',
-      ),
-      Character(
-        id: 1009189,
-        name: "Hawkeye",
-        image: "https://i.annihil.us/u/prod/marvel/i/mg/e/90/50fecaf4f101b.jpg",
-        description: '',
-      ),
-      Character(
-        id: 1009662,
-        name: "Black Panther",
-        image: "https://i.annihil.us/u/prod/marvel/i/mg/6/60/5261a80a67e7d.jpg",
-        description: '',
-      ),
-      Character(
-        id: 1009282,
-        name: "Captain Marvel",
-        image: "https://i.annihil.us/u/prod/marvel/i/mg/6/80/5269608c1be7a.jpg",
-        description: '',
-      ),
-    ];
+    final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
 
-    await Future.delayed(const Duration(seconds: 3));
+    final marvelHashGeneratorParams = MarvelHashGeneratorParams(
+        timestamp: timestamp,
+        publicKey: marvelPublicKey,
+        privateKey: marvelPrivateKey);
 
-    return characters;
+    final marvelHash =
+        await marvelHashGenerator.execute(marvelHashGeneratorParams);
+
+    final params = {
+      'apikey': marvelPublicKey,
+      'ts': timestamp.toString(),
+      'hash': marvelHash,
+      'limit': limit.toString(),
+    };
+
+    final Uri uri =
+        Uri.https('gateway.marvel.com', '/v1/public/characters', params);
+
+    final response = await http.get(uri);
+    final data = jsonDecode(response.body);
+
+    final charactersResponse = CharactersResponse.fromJson(data);
+    return charactersResponse.data.results;
   }
 }

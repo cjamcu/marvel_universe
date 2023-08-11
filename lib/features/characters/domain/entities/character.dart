@@ -4,7 +4,7 @@ class Character extends Equatable {
   final int id;
   final String name;
   final String image;
-  final String description;
+  final String? description;
   final String? wikiUrl;
   final String? comicLink;
   final String? detailLink;
@@ -13,7 +13,7 @@ class Character extends Equatable {
     required this.id,
     required this.name,
     required this.image,
-    required this.description,
+     this.description,
     this.wikiUrl,
     this.comicLink,
     this.detailLink,

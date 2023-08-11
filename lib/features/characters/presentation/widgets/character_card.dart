@@ -32,6 +32,7 @@ class CharacterCard extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.2,
                 child: CharacterCacheImage(
                   imageUrl: character.image,
+                  heroTag: character.id,
                 ),
               ),
               Padding(
