@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:marvel_universe/core/usecases/marvel_hash_generator.dart';
-import 'package:marvel_universe/features/characters/data/models/characters_response.dart';
+import 'package:marvel_universe/features/characters/data/models/characters_model.dart';
 import 'package:marvel_universe/features/characters/domain/entities/character.dart';
 import 'package:marvel_universe/features/characters/domain/repositories/marvel_repository.dart';
 import 'package:http/http.dart' as http;
@@ -52,7 +52,7 @@ class MarvelRepositoryImpl implements MarvelRepository {
     final response = await http.get(uri);
     final data = jsonDecode(response.body);
 
-    final charactersResponse = CharactersResponse.fromJson(data);
+    final charactersResponse = CharactersModel.fromJson(data);
     return CharactersInfo(
       characters: charactersResponse.data.results,
       totalElements: charactersResponse.data.total,

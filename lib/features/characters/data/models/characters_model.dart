@@ -1,19 +1,19 @@
 import 'package:marvel_universe/core/extensions/list.dart';
 import 'package:marvel_universe/features/characters/domain/entities/character.dart';
 
-class CharactersResponse {
+class CharactersModel {
   int code;
   String status;
   Data data;
 
-  CharactersResponse({
+  CharactersModel({
     required this.code,
     required this.status,
     required this.data,
   });
 
-  factory CharactersResponse.fromJson(Map<String, dynamic> json) {
-    return CharactersResponse(
+  factory CharactersModel.fromJson(Map<String, dynamic> json) {
+    return CharactersModel(
       code: json['code'],
       status: json['status'],
       data: Data.fromJson(json['data']),
@@ -26,7 +26,7 @@ class Data {
   int limit;
   int total;
   int count;
-  List<CharacterResponse> results;
+  List<CharacterModel> results;
 
   Data({
     required this.offset,
@@ -42,14 +42,14 @@ class Data {
       limit: json['limit'],
       total: json['total'],
       count: json['count'],
-      results: List<CharacterResponse>.from(
-          json['results'].map((x) => CharacterResponse.fromJson(x))),
+      results: List<CharacterModel>.from(
+          json['results'].map((x) => CharacterModel.fromJson(x))),
     );
   }
 }
 
-class CharacterResponse extends Character {
-  const CharacterResponse({
+class CharacterModel extends Character {
+  const CharacterModel({
     required int id,
     required String name,
     required String description,
@@ -70,13 +70,13 @@ class CharacterResponse extends Character {
           detailLink: detailLink,
         );
 
-  factory CharacterResponse.fromJson(Map<String, dynamic> json) {
+  factory CharacterModel.fromJson(Map<String, dynamic> json) {
     final thumbnail = Thumbnail.fromJson(json['thumbnail']);
     final List<Url> urls =
         List<Url>.from(json['urls'].map((x) => Url.fromJson(x)));
     final image = '${thumbnail.path}.${thumbnail.extension}';
 
-    return CharacterResponse(
+    return CharacterModel(
       id: json['id'],
       name: json['name'],
       description: json['description'],
