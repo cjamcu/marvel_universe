@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marvel_universe/features/characters/domain/entities/character.dart';
 import 'package:marvel_universe/features/characters/presentation/widgets/character_cache_image.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CharacterDetailPage extends StatelessWidget {
   static route(Character character) {
@@ -86,13 +87,21 @@ class CharacterDetailPage extends StatelessWidget {
                 children: [
                   if (character.detailLink != null)
                     ElevatedButton(
-                        onPressed: () {}, child: Text("Detail".toUpperCase())),
+                        onPressed: () {
+                          _launchURL(character.detailLink);
+                        },
+                        child: Text("Detail".toUpperCase())),
                   if (character.wikiUrl != null)
                     ElevatedButton(
-                        onPressed: () {}, child: Text("Wiki".toUpperCase())),
+                        onPressed: () {
+                          _launchURL(character.detailLink);
+                        },
+                        child: Text("Wiki".toUpperCase())),
                   if (character.comicLink != null)
                     ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _launchURL(character.detailLink);
+                        },
                         child: Text("ComicLink".toUpperCase())),
                 ],
               )
@@ -101,5 +110,13 @@ class CharacterDetailPage extends StatelessWidget {
         ),
       ],
     ));
+  }
+
+  Future<void> _launchURL(String? url) async {
+    if (url == null) return;
+    final uri = Uri.parse(url);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $url');
+    }
   }
 }

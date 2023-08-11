@@ -43,6 +43,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   crypto: ^3.0.3
   bloc: ^8.1.2
+  url_launcher: ^6.1.12
 
 dev_dependencies:
   flutter_test:
