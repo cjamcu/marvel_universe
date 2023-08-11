@@ -106,11 +106,6 @@ class Thumbnail {
       extension: json['extension'],
     );
   }
-
-  Map<String, dynamic> toJson() => {
-        'path': path,
-        'extension': extension,
-      };
 }
 
 class Url {
@@ -128,9 +123,4 @@ class Url {
       url: json['url'],
     );
   }
-
-  Map<String, dynamic> toJson() => {
-        'type': type,
-        'url': url,
-      };
 }
