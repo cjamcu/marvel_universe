@@ -9,9 +9,11 @@ class FindCharacters extends UseCase<CharactersInfo, FindCharactersParams> {
 
   @override
   Future<CharactersInfo> execute(FindCharactersParams params) async {
+    final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
     return await repository.findCharacters(
       page: params.page,
       name: params.name,
+      timestamp: timestamp,
     );
   }
 }
