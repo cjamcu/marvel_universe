@@ -10,12 +10,12 @@ Flutter, leveraging the robust BLoC state management. We've embraced a clean arc
 structure, and adhered to the SOLID principles to ensure a robust and scalable codebase.
 
 ### Table of Contents
+
 - [Installation](#installation)
 - [Features](#features)
 - [Architecture](#architecture-proposal)
 - [Testing](#testing-strategy)
 - [Dependencies](#dependencies)
-
 
 ## Installation
 
@@ -32,53 +32,74 @@ structure, and adhered to the SOLID principles to ensure a robust and scalable c
 - [x] Search for characters by name
 - [x] View character details
 
-
-
 ## Architecture Proposal
 
-The architecture of the project is based on the Clean Architecture. This architectural pattern promotes separation of concerns and maintainability by dividing the project into distinct layers: presentation, domain, and data.
+The architecture of the project is based on the Clean Architecture. This architectural pattern promotes separation of
+concerns and maintainability by dividing the project into distinct layers: presentation, domain, and data.
 
 ### Presentation Layer
-In the presentation layer, we handle the user interface, application logic, and state management using the BLoC pattern. Each screen corresponds to a Bloc which manages the state and interactions of the UI components.
+
+In the presentation layer, we handle the user interface, application logic, and state management using the BLoC pattern.
+Each screen corresponds to a Bloc which manages the state and interactions of the UI components.
 
 ### Domain Layer
-The domain layer contains the core business logic of the application. It includes use cases that encapsulate the interactions between the presentation and data layers. The entities in this layer represent the core data structures, while the repositories define the contract for data retrieval.
+
+The domain layer contains the core business logic of the application. It includes use cases that encapsulate the
+interactions between the presentation and data layers. The entities in this layer represent the core data structures,
+while the repositories define the contract for data retrieval.
 
 ### Data Layer
-The data layer is responsible for interacting with external data sources, such as APIs or databases. It includes the implementation of the repositories defined in the domain layer, as well as data models that map to the external data structures.
+
+The data layer is responsible for interacting with external data sources, such as APIs or databases. It includes the
+implementation of the repositories defined in the domain layer, as well as data models that map to the external data
+structures.
 
 Using this architecture has several benefits, including:
 
-- **Modularity:** Each layer is independent, making it easier to replace or modify components without affecting the entire system.
+- **Modularity:** Each layer is independent, making it easier to replace or modify components without affecting the
+  entire system.
 - **Testability:** The separation of concerns allows for easier unit testing of individual components.
-- **Scalability:** The architecture is designed to accommodate growth and new features without compromising the existing codebase.
+- **Scalability:** The architecture is designed to accommodate growth and new features without compromising the existing
+  codebase.
 
 ![Architecture Proposal](https://raw.githubusercontent.com/cjamcu/marvel_universe/main/images/clean-architecture.webp)
 
+Image Source: [Platzi](https://platzi.com/clases/1603-flutter-avanzado/20221-bloc-clean-architecture-en-flutter/)
 
 ## Testing Strategy
 
-Ensuring the reliability and stability of our application is crucial. To achieve this, we have adopted a comprehensive testing strategy that covers various aspects of the codebase. Our testing strategy is organized as follows:
+Ensuring the reliability and stability of our application is crucial. To achieve this, we have adopted a comprehensive
+testing strategy that covers various aspects of the codebase. Our testing strategy is organized as follows:
 
 ### Unit Tests
 
-We've implemented unit tests for different layers of the application using the Flutter test framework. These tests focus on testing individual functions, methods, and classes in isolation. Our unit tests are structured as follows:
+We've implemented unit tests for different layers of the application using the Flutter test framework. These tests focus
+on testing individual functions, methods, and classes in isolation. Our unit tests are structured as follows:
 
-- **Core Layer Use Cases:** Unit tests for the core use cases, such as `MarvelHashGenerator`, ensure that crucial functionalities are working as expected.
+- **Core Layer Use Cases:** Unit tests for the core use cases, such as `MarvelHashGenerator`, ensure that crucial
+  functionalities are working as expected.
 
-- **Characters Domain Layer Use Cases:** The domain layer's use cases, including `FindCharacters` and `CalculateLimitItems`, are thoroughly tested to validate their correctness and interactions.
+- **Characters Domain Layer Use Cases:** The domain layer's use cases, including `FindCharacters`
+  and `CalculateLimitItems`, are thoroughly tested to validate their correctness and interactions.
 
-- **Characters Data Layer:** Our data layer unit tests cover various aspects, including the correctness of the `CharacterModel` data model and the functionality of the `MarvelRepositoryImpl`.
+- **Characters Data Layer:** Our data layer unit tests cover various aspects, including the correctness of
+  the `CharacterModel` data model and the functionality of the `MarvelRepositoryImpl`.
 
-- **Characters Data Sources:** Tests for the data sources, specifically `MarvelRemoteDataSource`, ensure that API interactions are functioning correctly.
+- **Characters Data Sources:** Tests for the data sources, specifically `MarvelRemoteDataSource`, ensure that API
+  interactions are functioning correctly.
 
-- **Characters Presentation Layer:** We've created unit tests for the `CharactersBloc`, validating the state management and business logic of the presentation layer.
+- **Characters Presentation Layer:** We've created unit tests for the `CharactersBloc`, validating the state management
+  and business logic of the presentation layer.
 
 ### Fixtures
 
-To facilitate testing, we've included fixtures in the `fixtures` directory. These JSON files, such as `characters.json`, contain sample data that closely resembles real API responses. These fixtures help ensure consistent and controlled testing scenarios.
+To facilitate testing, we've included fixtures in the `fixtures` directory. These JSON files, such as `characters.json`,
+contain sample data that closely resembles real API responses. These fixtures help ensure consistent and controlled
+testing scenarios.
 
-Our testing process involves running these unit tests on a regular basis as we develop and enhance the application. Additionally, we ensure that new features or modifications are accompanied by relevant unit tests to maintain code quality and stability.
+Our testing process involves running these unit tests on a regular basis as we develop and enhance the application.
+Additionally, we ensure that new features or modifications are accompanied by relevant unit tests to maintain code
+quality and stability.
 
 ## Dependencies
 
