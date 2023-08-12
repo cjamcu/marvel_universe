@@ -5,5 +5,6 @@ abstract class MarvelRepository {
     required int page,
     required String timestamp,
     String? name,
+    required int limit,
   });
 }

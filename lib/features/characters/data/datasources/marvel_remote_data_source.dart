@@ -9,6 +9,7 @@ abstract class MarvelRemoteDataSource {
   Future<CharactersInfo> findCharacters({
     required int page,
     required String timestamp,
+    required int limit,
     String? name,
   });
 }
@@ -30,9 +31,9 @@ class MarvelRemoteDataSourceImpl implements MarvelRemoteDataSource {
   Future<CharactersInfo> findCharacters({
     required int page,
     required String timestamp,
+    required int limit,
     String? name,
   }) async {
-    const limit = 10;
     final offset = page * limit;
     final marvelHashGeneratorParams = MarvelHashGeneratorParams(
       timestamp: timestamp,

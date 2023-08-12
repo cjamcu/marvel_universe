@@ -34,6 +34,7 @@ void main() {
           page: params.page,
           name: params.name,
           timestamp: timestamp,
+          limit: params.limit,
         )).thenAnswer((_) async => charactersInfo);
 
     // Act

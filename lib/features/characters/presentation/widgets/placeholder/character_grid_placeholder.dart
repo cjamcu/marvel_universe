@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:marvel_universe/features/characters/presentation/widgets/placeholder/character_card_placeholder.dart';
+import 'package:responsive_grid/responsive_grid.dart';
 
 class CharacterGridPlaceholder extends StatelessWidget {
   const CharacterGridPlaceholder({super.key, required this.itemCount});
@@ -9,17 +10,11 @@ class CharacterGridPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.9,
-        mainAxisSpacing: 5,
-        crossAxisSpacing: 0,
-      ),
-      itemCount: itemCount,
-      itemBuilder: (context, index) {
-        return const CharacterCardPlaceholder();
-      },
+    return ResponsiveGridList(
+      desiredItemWidth: 150,
+      minSpacing: 10,
+      children:
+          List.generate(itemCount, (index) => const CharacterCardPlaceholder()),
     );
   }
 }

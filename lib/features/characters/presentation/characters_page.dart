@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_universe/features/character_detail/presentation/character_detail_page.dart';
 import 'package:marvel_universe/features/characters/domain/entities/character.dart';
+import 'package:marvel_universe/features/characters/domain/usecases/calculate_limit_items.dart';
 import 'package:marvel_universe/features/characters/presentation/bloc/characters_bloc.dart';
 import 'package:marvel_universe/features/characters/presentation/widgets/centered_text.dart';
 import 'package:marvel_universe/features/characters/presentation/widgets/character_grid.dart';
 import 'package:marvel_universe/features/characters/presentation/widgets/placeholder/character_grid_placeholder.dart';
 import 'package:marvel_universe/features/characters/presentation/widgets/search_text_field.dart';
 import '../../../injection_container.dart';
+import 'package:marvel_universe/core/extensions/dimens.dart';
 
 class CharactersPage extends StatelessWidget {
   const CharactersPage({Key? key}) : super(key: key);
@@ -15,6 +17,10 @@ class CharactersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final charactersBloc = getIt<CharactersBloc>();
+
+    final screenWidth = MediaQuery.of(context).size.width;
+    final limit = getIt<CalculateLimitItems>()
+        .execute(CalculateLimitItemsParams(screenWidth: screenWidth));
 
     return Scaffold(
       appBar: AppBar(
@@ -30,22 +36,26 @@ class CharactersPage extends StatelessWidget {
               hintText: 'Search by character name',
               onChanged: (value) {
                 charactersBloc.add(SearchCharactersByNameEvent(
-                    name: value, timestamp: _getTimestamp()));
+                    name: value, timestamp: _getTimestamp(), limit: limit));
               },
             ),
-            const SizedBox(height: 10),
+            10.height,
             BlocBuilder<CharactersBloc, CharactersState>(
-              bloc: charactersBloc..add(FindCharactersEvent(_getTimestamp())),
+              bloc: charactersBloc
+                ..add(FindCharactersEvent(
+                    timestamp: _getTimestamp(), limit: limit)),
               builder: (context, state) {
                 if (state is ErrorLoadingCharacters) {
                   return Column(
                     children: [
                       const CenteredText(text: "Error fetching characters"),
-                      const SizedBox(height: 10),
+                      10.height,
                       ElevatedButton(
                         onPressed: () {
-                          charactersBloc
-                              .add(FindCharactersEvent(_getTimestamp()));
+                          charactersBloc.add(
+                            FindCharactersEvent(
+                                timestamp: _getTimestamp(), limit: limit),
+                          );
                         },
                         child: const Text("Retry"),
                       ),
@@ -58,8 +68,8 @@ class CharactersPage extends StatelessWidget {
                 final isLoadingMore = state is LoadingMoreCharacters;
 
                 if (isLoading) {
-                  return const Expanded(
-                      child: CharacterGridPlaceholder(itemCount: 10));
+                  return Expanded(
+                      child: CharacterGridPlaceholder(itemCount: limit));
                 }
                 if (searchIsEmpty) {
                   return const CenteredText(
@@ -85,8 +95,10 @@ class CharactersPage extends StatelessWidget {
                             );
                           },
                           onEndOfList: (void value) {
-                            charactersBloc
-                                .add(LoadMoreCharactersEvent(_getTimestamp()));
+                            charactersBloc.add(
+                              LoadMoreCharactersEvent(
+                                  timestamp: _getTimestamp(), limit: limit),
+                            );
                           },
                           isLoadingMore: isLoadingMore,
                         ),

@@ -26,6 +26,7 @@ void main() {
         remoteDataSource.findCharacters(
             page: any(named: 'page'),
             timestamp: any(named: 'timestamp'),
+            limit: any(named: 'limit'),
             name: any(named: 'name'))).thenAnswer((_) async =>
         const CharactersInfo(totalElements: 1, totalPages: 1, characters: []));
 
@@ -33,7 +34,8 @@ void main() {
       marvelRemoteDataSource: remoteDataSource,
     );
 
-    final result = await repository.findCharacters(page: 0, timestamp: '');
+    final result =
+        await repository.findCharacters(page: 0, timestamp: '', limit: 10);
 
     expect(result, isA<CharactersInfo>());
   });

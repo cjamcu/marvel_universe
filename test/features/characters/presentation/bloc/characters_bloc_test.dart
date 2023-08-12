@@ -46,7 +46,7 @@ void main() {
           (_) async => charactersInfo,
         );
 
-        bloc.add(FindCharactersEvent(timestamp));
+        bloc.add(FindCharactersEvent(timestamp: timestamp));
       },
       expect: () => [
         const LoadingCharacters(Model()),
@@ -102,12 +102,13 @@ void main() {
           totalElements: 2,
           totalPages: 2,
         );
-        registerFallbackValue(FindCharactersParams(timestamp: timestamp));
+        registerFallbackValue(
+            FindCharactersParams(timestamp: timestamp, limit: 0));
         when(() => findCharacters.execute(any())).thenAnswer(
           (_) async => charactersInfo,
         );
 
-        bloc.add(LoadMoreCharactersEvent(timestamp));
+        bloc.add(LoadMoreCharactersEvent(timestamp: timestamp, limit: 0));
       },
       expect: () => [
         const LoadingMoreCharacters(Model()),
@@ -134,7 +135,7 @@ void main() {
         when(() => findCharacters.execute(params))
             .thenThrow(Exception('Test error'));
 
-        bloc.add(FindCharactersEvent(timestamp));
+        bloc.add(FindCharactersEvent(timestamp: timestamp));
       },
       expect: () => [
         const LoadingCharacters(Model()),

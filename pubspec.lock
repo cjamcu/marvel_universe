@@ -113,6 +113,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
+  covadge:
+    dependency: "direct dev"
+    description:
+      name: covadge
+      sha256: "9a8f02609b620daae0c14192339b64068b0e120455d1041b43e5c5f74c86875b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   coverage:
     dependency: transitive
     description:
@@ -480,6 +488,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  responsive_grid:
+    dependency: "direct main"
+    description:
+      name: responsive_grid
+      sha256: e0fa843cfd01bb041ea5d56e0dfb3654c60977733d71f2b387a3a81ffac8e569
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.2"
   rxdart:
     dependency: transitive
     description:

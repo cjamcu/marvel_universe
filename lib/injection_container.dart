@@ -8,6 +8,8 @@ import 'package:marvel_universe/features/characters/domain/usecases/find_charact
 import 'package:marvel_universe/features/characters/presentation/bloc/characters_bloc.dart';
 import 'package:http/http.dart' as http;
 
+import 'package:marvel_universe/features/characters/domain/usecases/calculate_limit_items.dart';
+
 final getIt = GetIt.instance;
 
 Future<void> init() async {
@@ -25,6 +27,8 @@ Future<void> init() async {
 
   getIt.registerLazySingleton<MarvelRepository>(
       () => MarvelRepositoryImpl(marvelRemoteDataSource: getIt()));
+
+  getIt.registerLazySingleton(() => CalculateLimitItems());
 
   getIt.registerLazySingleton(() => http.Client());
 }

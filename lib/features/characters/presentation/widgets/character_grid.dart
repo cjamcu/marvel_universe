@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marvel_universe/features/characters/domain/entities/character.dart';
 import 'package:marvel_universe/features/characters/presentation/widgets/character_card.dart';
 import 'package:marvel_universe/features/characters/presentation/widgets/placeholder/character_card_placeholder.dart';
+import 'package:responsive_grid/responsive_grid.dart';
 
 class CharacterGrid extends StatefulWidget {
   const CharacterGrid({
@@ -28,43 +29,36 @@ class _CharacterGridState extends State<CharacterGrid> {
   void initState() {
     super.initState();
     scrollController.addListener(() {
-      if (scrollController.position.maxScrollExtent ==
-          scrollController.offset) {
+      if (scrollController.position.extentAfter < 0.1 * scrollController.position.extentInside) {
         if (!widget.isLoadingMore) {
           widget.onEndOfList(null);
         }
       }
     });
   }
-
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
+    return ResponsiveGridList(
+
       controller: scrollController,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.9,
-        mainAxisSpacing: 5,
-        crossAxisSpacing: 0,
-      ),
-      itemCount: widget.characters.length + (widget.isLoadingMore ? 2 : 0),
-      itemBuilder: (context, index) {
-        if (index < widget.characters.length) {
-          final character = widget.characters[index];
-          return CharacterCard(
+      desiredItemWidth: 150,
+      minSpacing: 10,
+      children: [
+        ...widget.characters.map(
+          (character) => CharacterCard(
             character: character,
             onTap: () => widget.onTap(character),
-          );
-        } else if (widget.isLoadingMore) {
-          return const Padding(
-            padding: EdgeInsets.only(bottom: 10.0),
-            child: CharacterCardPlaceholder(),
-          );
-        } else {
-          return const SizedBox.shrink();
-        }
-      },
+          ),
+        ),
+        if (widget.isLoadingMore)
+          ...List.generate(
+            4,
+            (index) => const Padding(
+              padding: EdgeInsets.only(bottom: 10.0),
+              child: CharacterCardPlaceholder(),
+            ),
+          ),
+      ],
     );
   }
 }

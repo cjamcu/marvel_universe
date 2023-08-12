@@ -13,9 +13,10 @@ class MarvelRepositoryImpl implements MarvelRepository {
   Future<CharactersInfo> findCharacters({
     required int page,
     required String timestamp,
+    required int limit,
     String? name,
   }) async {
     return await marvelRemoteDataSource.findCharacters(
-        page: page, timestamp: timestamp, name: name);
+        page: page, timestamp: timestamp, name: name,limit : limit);
   }
 }

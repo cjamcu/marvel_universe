@@ -25,8 +25,10 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
   ) async {
     emit(LoadingCharacters(state.model));
     try {
-      final charactersResponse = await _fetchCharacters(
-          FindCharactersParams(timestamp: event.timestamp));
+      final charactersResponse = await _fetchCharacters(FindCharactersParams(
+        timestamp: event.timestamp,
+        limit: event.limit,
+      ));
       emit(_createLoadedCharactersState(charactersResponse));
     } catch (_) {
       _emitErrorState(emit);
@@ -43,9 +45,11 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
       ));
 
       final charactersResponse = await _fetchCharacters(FindCharactersParams(
-          name: event.name,
-          page: state.model.page,
-          timestamp: event.timestamp));
+        name: event.name,
+        page: state.model.page,
+        timestamp: event.timestamp,
+        limit: event.limit,
+      ));
 
       if (charactersResponse.characters.isEmpty) {
         emit(NoResultsFound(state.model));
@@ -74,6 +78,7 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
           name: state.model.searchQuery,
           page: state.model.page + 1,
           timestamp: event.timestamp,
+          limit: event.limit,
         ),
       );
 

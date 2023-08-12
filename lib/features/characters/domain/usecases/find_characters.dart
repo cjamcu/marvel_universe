@@ -14,6 +14,7 @@ class FindCharacters extends UseCase<CharactersInfo, FindCharactersParams> {
       page: params.page,
       name: params.name,
       timestamp: params.timestamp,
+      limit: params.limit,
     );
   }
 }
@@ -22,11 +23,13 @@ class FindCharactersParams extends Equatable {
   final int page;
   final String? name;
   final String timestamp;
+  final int limit;
 
   const FindCharactersParams({
     this.page = 0,
     this.name,
     required this.timestamp,
+    this.limit = 10,
   });
 
   @override
