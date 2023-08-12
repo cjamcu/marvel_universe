@@ -49,9 +49,12 @@ class CharacterDetailPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: const BackButton(
-                      color: Colors.red,
-                    ),
+                    child: IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon:  Icon(
+                          Icons.arrow_back,
+                          color: Theme.of(context).primaryColor,
+                        )),
                   ),
                 ),
               ),
