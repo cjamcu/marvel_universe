@@ -5,7 +5,3 @@ abstract class UseCase<Type, Params> {
 abstract class BaseUseCase<Type, Params> {
   Type execute(Params params);
 }
-
-class NoParams {
-  const NoParams();
-}
