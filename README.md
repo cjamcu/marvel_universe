@@ -48,6 +48,30 @@ Using this architecture has several benefits, including:
 ![Architecture Proposal](https://raw.githubusercontent.com/cjamcu/marvel_universe/main/images/clean-architecture.webp)
 
 
+## Testing Strategy
+
+Ensuring the reliability and stability of our application is crucial. To achieve this, we have adopted a comprehensive testing strategy that covers various aspects of the codebase. Our testing strategy is organized as follows:
+
+### Unit Tests
+
+We've implemented unit tests for different layers of the application using the Flutter test framework. These tests focus on testing individual functions, methods, and classes in isolation. Our unit tests are structured as follows:
+
+- **Core Layer Use Cases:** Unit tests for the core use cases, such as `MarvelHashGenerator`, ensure that crucial functionalities are working as expected.
+
+- **Characters Domain Layer Use Cases:** The domain layer's use cases, including `FindCharacters` and `CalculateLimitItems`, are thoroughly tested to validate their correctness and interactions.
+
+- **Characters Data Layer:** Our data layer unit tests cover various aspects, including the correctness of the `CharacterModel` data model and the functionality of the `MarvelRepositoryImpl`.
+
+- **Characters Data Sources:** Tests for the data sources, specifically `MarvelRemoteDataSource`, ensure that API interactions are functioning correctly.
+
+- **Characters Presentation Layer:** We've created unit tests for the `CharactersBloc`, validating the state management and business logic of the presentation layer.
+
+### Fixtures
+
+To facilitate testing, we've included fixtures in the `fixtures` directory. These JSON files, such as `characters.json`, contain sample data that closely resembles real API responses. These fixtures help ensure consistent and controlled testing scenarios.
+
+Our testing process involves running these unit tests on a regular basis as we develop and enhance the application. Additionally, we ensure that new features or modifications are accompanied by relevant unit tests to maintain code quality and stability.
+
 ## Dependencies
 
 We've leveraged a range of external dependencies to enhance the functionality and performance of the app. Each
@@ -66,4 +90,8 @@ dependency serves a specific purpose, contributing to the overall experience:
 - bloc_test: ^9.1.4
 - responsive_grid: ^2.4.2
 - device_preview: ^1.1.0
+
+
+
+
 
