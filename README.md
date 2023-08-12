@@ -16,6 +16,7 @@ structure, and adhered to the SOLID principles to ensure a robust and scalable c
 - [Architecture](#architecture-proposal)
 - [Testing](#testing-strategy)
 - [Dependencies](#dependencies)
+- [Screenshots](#screenshots)
 
 ## Installation
 
@@ -121,6 +122,14 @@ dependency serves a specific purpose, contributing to the overall experience:
 - device_preview: ^1.1.0
 
 
+## Screenshots
 
+### Mobile 
 
+![Mobile](https://raw.githubusercontent.com/cjamcu/marvel_universe/main/images/home-image-mobile.png)
+![Mobile](https://raw.githubusercontent.com/cjamcu/marvel_universe/main/images/detail-image-mobile.png)
 
+### Tablet
+
+![Tablet](https://raw.githubusercontent.com/cjamcu/marvel_universe/main/images/home-image-tablet.png)
+![Tablet](https://raw.githubusercontent.com/cjamcu/marvel_universe/main/images/detail-image-tablet.png)
