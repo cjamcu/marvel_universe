@@ -8,6 +8,19 @@ for characters by name, enhancing your experience even further. On the technical
 Flutter, leveraging the robust BLoC state management. We've embraced a clean architecture, following a layered
 structure, and adhered to the SOLID principles to ensure a robust and scalable codebase.
 
+## Getting Started
+
+- Change name of .env.example to .env and add your public and private keys from marvel api to the file. (In this case
+  the keys are already added for more easy testing. **This is not recommended in a real project**)
+- Run `flutter pub get` to install dependencies
+- Run `flutter run` to run the app 
+
+## Features
+
+- [x] View all characters with infinite scrolling
+- [x] Search for characters by name
+- [x] View character details
+
 ## Dependencies
 
 We've leveraged a range of external dependencies to enhance the functionality and performance of the app. Each
@@ -27,4 +40,3 @@ dependency serves a specific purpose, contributing to the overall experience:
 - responsive_grid: ^2.4.2
 - device_preview: ^1.1.0
 
-## 
