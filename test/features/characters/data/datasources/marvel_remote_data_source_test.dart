@@ -55,8 +55,8 @@ void main() {
       marvelPrivateKey: '',
     );
 
-    final result =
-        await repository.findCharacters(page: 0, timestamp: timestamp);
+    final result = await repository.findCharacters(
+        page: 0, timestamp: timestamp, limit: 10);
 
     expect(result, isA<CharactersInfo>());
   });
