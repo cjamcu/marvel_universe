@@ -9,6 +9,14 @@ for characters by name, enhancing your experience even further. On the technical
 Flutter, leveraging the robust BLoC state management. We've embraced a clean architecture, following a layered
 structure, and adhered to the SOLID principles to ensure a robust and scalable codebase.
 
+### Table of Contents
+- [Installation](#installation)
+- [Features](#features)
+- [Architecture](#architecture-proposal)
+- [Testing](#testing-strategy)
+- [Dependencies](#dependencies)
+
+
 ## Installation
 
 - Run `git clone https://github.com/cjamcu/marvel_universe.git` to clone the repository
