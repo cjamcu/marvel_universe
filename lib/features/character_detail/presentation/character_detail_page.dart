@@ -51,7 +51,7 @@ class CharacterDetailPage extends StatelessWidget {
                     ),
                     child: IconButton(
                         onPressed: () => Navigator.pop(context),
-                        icon:  Icon(
+                        icon: Icon(
                           Icons.arrow_back,
                           color: Theme.of(context).primaryColor,
                         )),

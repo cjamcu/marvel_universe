@@ -29,17 +29,18 @@ class _CharactersGridState extends State<CharactersGrid> {
   void initState() {
     super.initState();
     scrollController.addListener(() {
-      if (scrollController.position.extentAfter < 0.1 * scrollController.position.extentInside) {
+      if (scrollController.position.extentAfter <
+          0.1 * scrollController.position.extentInside) {
         if (!widget.isLoadingMore) {
           widget.onEndOfList(null);
         }
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return ResponsiveGridList(
-
       controller: scrollController,
       desiredItemWidth: 150,
       minSpacing: 10,

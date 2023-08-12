@@ -7,7 +7,7 @@ import 'injection_container.dart' as di;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env"  );
+  await dotenv.load(fileName: ".env");
   await di.init();
   runApp(
     DevicePreview(
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home:  const CharactersPage(),
+      home: const CharactersPage(),
     );
   }
 }

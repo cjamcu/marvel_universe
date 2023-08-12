@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:marvel_universe/features/characters/domain/usecases/calculate_limit_items.dart';
 
-
 void main() {
   group('CalculateLimitItems', () {
     late CalculateLimitItems calculateLimitItems;
