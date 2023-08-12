@@ -24,5 +24,7 @@ dependency serves a specific purpose, contributing to the overall experience:
 - url_launcher: ^6.1.12
 - mocktail: ^1.0.0
 - bloc_test: ^9.1.4
+- responsive_grid: ^2.4.2
+- device_preview: ^1.1.0
 
 ## 
