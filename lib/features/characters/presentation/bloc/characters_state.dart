@@ -10,68 +10,32 @@ abstract class CharactersState extends Equatable {
 }
 
 class CharactersInitial extends CharactersState {
-  final Model model;
-
-  const CharactersInitial(this.model) : super(model);
-
-  @override
-  List<Object> get props => [model];
+  const CharactersInitial(Model model) : super(model);
 }
 
 class LoadingCharacters extends CharactersState {
-  final Model model;
-
-  const LoadingCharacters(this.model) : super(model);
-
-  @override
-  List<Object> get props => [model];
+  const LoadingCharacters(Model model) : super(model);
 }
 
 class LoadedCharacters extends CharactersState {
-  final Model model;
-
-  const LoadedCharacters(this.model) : super(model);
-
-  @override
-  List<Object> get props => [model];
+  const LoadedCharacters(Model model) : super(model);
 }
 
 class ErrorLoadingCharacters extends CharactersState {
-  final Model model;
-
-  const ErrorLoadingCharacters(this.model) : super(model);
-
-  @override
-  List<Object> get props => [model];
+  const ErrorLoadingCharacters(Model model) : super(model);
 }
 
 class SearchingCharacters extends CharactersState {
-  final Model model;
-
-  const SearchingCharacters(this.model) : super(model);
-
-  @override
-  List<Object> get props => [model];
+  const SearchingCharacters(Model model) : super(model);
 }
 
 class NoResultsFound extends CharactersState {
-  final Model model;
-
-  const NoResultsFound(this.model) : super(model);
-
-  @override
-  List<Object> get props => [model];
+  const NoResultsFound(Model model) : super(model);
 }
 
 class LoadingMoreCharacters extends CharactersState {
-  final Model model;
-
-  const LoadingMoreCharacters(this.model) : super(model);
-
-  @override
-  List<Object> get props => [model];
+  const LoadingMoreCharacters(Model model) : super(model);
 }
-
 
 class Model extends Equatable {
   final List<Character> characters;
@@ -107,5 +71,3 @@ class Model extends Equatable {
   @override
   List<Object?> get props => [characters, totalPages, page];
 }
-
-
