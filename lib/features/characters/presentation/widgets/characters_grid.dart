@@ -4,8 +4,8 @@ import 'package:marvel_universe/features/characters/presentation/widgets/charact
 import 'package:marvel_universe/features/characters/presentation/widgets/placeholder/character_card_placeholder.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
-class CharacterGrid extends StatefulWidget {
-  const CharacterGrid({
+class CharactersGrid extends StatefulWidget {
+  const CharactersGrid({
     Key? key,
     required this.characters,
     required this.onTap,
@@ -19,10 +19,10 @@ class CharacterGrid extends StatefulWidget {
   final bool isLoadingMore;
 
   @override
-  State<CharacterGrid> createState() => _CharacterGridState();
+  State<CharactersGrid> createState() => _CharactersGridState();
 }
 
-class _CharacterGridState extends State<CharacterGrid> {
+class _CharactersGridState extends State<CharactersGrid> {
   ScrollController scrollController = ScrollController();
 
   @override

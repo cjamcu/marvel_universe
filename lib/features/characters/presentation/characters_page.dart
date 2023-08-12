@@ -5,8 +5,8 @@ import 'package:marvel_universe/features/characters/domain/entities/character.da
 import 'package:marvel_universe/features/characters/domain/usecases/calculate_limit_items.dart';
 import 'package:marvel_universe/features/characters/presentation/bloc/characters_bloc.dart';
 import 'package:marvel_universe/features/characters/presentation/widgets/centered_text.dart';
-import 'package:marvel_universe/features/characters/presentation/widgets/character_grid.dart';
-import 'package:marvel_universe/features/characters/presentation/widgets/placeholder/character_grid_placeholder.dart';
+import 'package:marvel_universe/features/characters/presentation/widgets/characters_grid.dart';
+import 'package:marvel_universe/features/characters/presentation/widgets/placeholder/characters_grid_placeholder.dart';
 import 'package:marvel_universe/features/characters/presentation/widgets/search_text_field.dart';
 import '../../../injection_container.dart';
 import 'package:marvel_universe/core/extensions/dimens.dart';
@@ -69,7 +69,7 @@ class CharactersPage extends StatelessWidget {
 
                 if (isLoading) {
                   return Expanded(
-                      child: CharacterGridPlaceholder(itemCount: limit));
+                      child: CharactersGridPlaceholder(itemCount: limit));
                 }
                 if (searchIsEmpty) {
                   return const CenteredText(
@@ -85,7 +85,7 @@ class CharactersPage extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       Expanded(
-                        child: CharacterGrid(
+                        child: CharactersGrid(
                           characters: state.model.characters,
                           onTap: (Character character) {
                             FocusScope.of(context).unfocus();

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:marvel_universe/features/characters/presentation/widgets/placeholder/character_card_placeholder.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
-class CharacterGridPlaceholder extends StatelessWidget {
-  const CharacterGridPlaceholder({super.key, required this.itemCount});
+class CharactersGridPlaceholder extends StatelessWidget {
+  const CharactersGridPlaceholder({super.key, required this.itemCount});
 
   final int itemCount;
 
