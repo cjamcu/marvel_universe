@@ -81,7 +81,8 @@ class CharactersPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Loaded ${state.model.characters.length} of ${state.model.totalElements} characters',
+                        '''
+Loaded ${state.model.characters.length} of ${state.model.totalElements} characters''',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       Expanded(

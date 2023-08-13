@@ -20,7 +20,6 @@ class CharacterDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
@@ -64,7 +63,6 @@ class CharacterDetailPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(

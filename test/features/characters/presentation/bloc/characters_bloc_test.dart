@@ -35,12 +35,13 @@ void main() {
     );
 
     blocTest<CharactersBloc, CharactersState>(
-      'emits LoadingCharacters and LoadedCharacters when FindCharactersEvent is added',
+      '''
+     emits LoadingCharacters and LoadedCharacters 
+     when FindCharactersEvent is added''',
       build: () => charactersBloc,
       act: (bloc) {
         final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-        final params =
-            FindCharactersParams(timestamp: timestamp, page: 0, name: null);
+        final params = FindCharactersParams(timestamp: timestamp);
 
         when(() => findCharacters.execute(params)).thenAnswer(
           (_) async => charactersInfo,
@@ -60,13 +61,14 @@ void main() {
       ],
     );
     blocTest<CharactersBloc, CharactersState>(
-      'emits LoadingCharacters and NoResultsFound when SearchCharactersByNameEvent yields empty results',
+      '''
+    emits LoadingCharacters and NoResultsFound when 
+    SearchCharactersByNameEvent yields empty results''',
       build: () => charactersBloc,
       act: (bloc) {
         final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
 
-        final params =
-            FindCharactersParams(timestamp: timestamp, page: 0, name: 'abc');
+        final params = FindCharactersParams(timestamp: timestamp, name: 'abc');
 
         when(() => findCharacters.execute(params)).thenAnswer(
           (_) async => const CharactersInfo(
@@ -87,7 +89,9 @@ void main() {
     );
 
     blocTest<CharactersBloc, CharactersState>(
-      'emits LoadingMoreCharacters and LoadedCharacters when LoadMoreCharactersEvent is added',
+      '''
+emits LoadingMoreCharacters and LoadedCharacters 
+when LoadMoreCharactersEvent is added''',
       build: () => charactersBloc,
       act: (bloc) {
         final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
@@ -126,12 +130,13 @@ void main() {
     );
 
     blocTest<CharactersBloc, CharactersState>(
-      'emits LoadingCharacters and ErrorLoadingCharacters when FindCharactersEvent throws an error',
+      '''
+      emits LoadingCharacters and ErrorLoadingCharacters when 
+      FindCharactersEvent throws an error''',
       build: () => charactersBloc,
       act: (bloc) {
         final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-        final params =
-            FindCharactersParams(timestamp: timestamp, page: 0, name: 'abc');
+        final params = FindCharactersParams(timestamp: timestamp, name: 'abc');
         when(() => findCharacters.execute(params))
             .thenThrow(Exception('Test error'));
 
