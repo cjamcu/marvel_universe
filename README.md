@@ -9,6 +9,8 @@ for characters by name, enhancing your experience even further. On the technical
 Flutter, leveraging the robust BLoC state management. We've embraced a clean architecture, following a layered
 structure, and adhered to the SOLID principles to ensure a robust and scalable codebase.
 
+Demo Web: [https://marvel-universe-lac.vercel.app/](https://marvel-universe-lac.vercel.app/)
+
 ### Table of Contents
 
 - [Installation](#installation)
